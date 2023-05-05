@@ -1,7 +1,7 @@
 FROM php:8.2-apache
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/public
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
