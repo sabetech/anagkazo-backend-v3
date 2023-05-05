@@ -20,8 +20,6 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
-      CACHE_DRIVER: ${CACHE_DRIVER}
-      SESSION_DRIVER: ${SESSION_DRIVER}
-      QUEUE_DRIVER: ${QUEUE_DRIVER}
+ 
     volumes:
       - ./:/var/www/html
