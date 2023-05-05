@@ -2,7 +2,7 @@
 FROM php:8.2-apache
 
 # Set working directory
-WORKDIR /var/www/html/public
+WORKDIR /var/www/html/
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
