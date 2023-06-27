@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StudentAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,3 +25,5 @@ Route::get('/health', function () {
 Route::post('/health', function () {
     return response()->json(['status' => 'ok', 'method' => 'POST']);
 });
+
+Route::post('/pwa/verify-indexnumber', [StudentAPIController::class, 'verifyIndexNumber']);
