@@ -20,12 +20,15 @@ class StudentAPIController extends Controller
             $alreadyExists = false;
 
             if (!$student)
-                return response()->json(['response' => 'Index Number is Invalid'], 400);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid Index Number. Please check and try again.'
+                    ], 400);
         }
-
+        
+        $student->already_exists = $alreadyExists;
         return response()->json([
             'user' => $student,
-            'already_exists' => $alreadyExists,
             'success' => true
         ]);
     }
