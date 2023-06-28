@@ -18,7 +18,7 @@ class FedenaAPIHelper {
         $jsonString = json_encode($xml);
         $studentInfo = json_decode($jsonString, FALSE);
 
-        Log::info($studentInfo);
+        Log::info(print_r($studentInfo, TRUE));
 
         /*
         $request = new Request('GET', env('FEDENA_BASE_URL') . $indexNumber, $headers);
