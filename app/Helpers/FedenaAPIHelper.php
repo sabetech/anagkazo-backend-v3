@@ -14,8 +14,7 @@ class FedenaAPIHelper {
 
         $response = Http::withHeaders($headers)->timeout(15)->get(env('FEDENA_BASE_URL') . $indexNumber);
         
-        Log::info($response->body());
-        $xml = simplexml_load_string($body);
+        $xml = simplexml_load_string($response->body());
         $jsonString = json_encode($xml);
         $studentInfo = json_decode($jsonString, FALSE);
 
