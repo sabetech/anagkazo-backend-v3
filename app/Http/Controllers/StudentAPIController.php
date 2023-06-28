@@ -24,8 +24,22 @@ class StudentAPIController extends Controller
                     'success' => false,
                     'message' => 'Invalid Index Number. Please check and try again.'
                     ], 400);
+            
+            //save student
+            $student = Student::create([
+                "index_number" => $student->index_number,
+                "name" => $student->student_name,
+                "email_address" => $student->email,
+                "phone" => $student->mobile,
+                "class" => $student->batch_name,
+                "gender" => $student->gender,
+                "date_of_birth" => $student->date_of_birth,
+                "country" => $student->country,
+            ]);
+
+            //TODO: save photo in the background and update the student record
         }
-        
+
         $student->already_exists = $alreadyExists;
         return response()->json([
             'user' => $student,

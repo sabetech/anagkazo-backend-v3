@@ -20,31 +20,14 @@ class FedenaAPIHelper {
 
         Log::info(print_r($studentInfo, TRUE));
 
-        /*
-        $request = new Request('GET', env('FEDENA_BASE_URL') . $indexNumber, $headers);
-
-        $promise = $client->sendAsync($request)->then(function (Response $response) {
-            return $response->getBody();
-        }, function ($e) {
-            return $e;
-        });
-
-        $promise->then(
-            function ($body) {
-            $xml = simplexml_load_string($body);
-            $jsonString = json_encode($xml);
-            $studentInfoArray = json_decode($jsonString, TRUE);
-            
-            $newStudent = Student::saveFedenaStudent($studentInfoArray, $studentInfoArray['admission_no']);
-            return $newStudent;
-        }, 
-        function ($reason) {
-            Log::Error($reason->getMessage());
+        if (isset($studentInfo->student)) {
+            $student = $studentInfo->student;
+            $student->index_number = $indexNumber;
+            return $student;
+        }else{
             return false;
-        });
+        }
 
-        $promise->wait();
-        */
     }
 
 
