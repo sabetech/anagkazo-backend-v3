@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install zip \
     && docker-php-ext-install pdo_mysql \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && docker-php-ext-install sockets
 
 # Copy the application code into the container
 COPY . .
