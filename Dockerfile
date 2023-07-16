@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-ext-install pdo_mysql \
     && a2enmod rewrite \
-    && docker-php-ext-install sockets
+    && docker-php-ext-install sockets \
+    && docker-php-ext-install sodium
 
 # Copy the application code into the container
 COPY . .
