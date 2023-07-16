@@ -21,6 +21,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install sockets \
     && docker-php-ext-install sodium
 
+# Install the PHP extensions we need
+RUN pecl install amqp \
+    && docker-php-ext-enable amqp
+
 # Copy the application code into the container
 COPY . .
 
