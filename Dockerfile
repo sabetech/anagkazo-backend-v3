@@ -5,6 +5,12 @@ FROM php:8.2-apache
 WORKDIR /var/www/html/
 
 # Install required packages
+RUN apt-get update \
+    && apt-get install -y \
+        librabbitmq-dev \
+        libssh-dev \
+    && rm -rf /var/lib/apt/lists/*
+    
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     unzip \
