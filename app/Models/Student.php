@@ -15,4 +15,9 @@ class Student extends Model
     protected $dates = ['deleted_at'];
     protected $hidden = ['created_at', 'updated_at'];
 
+    public function pastoralPoints()
+    {
+        return $this->belongsToMany('\App\PastoralPoint', 'student_point', 'student_id', 'parameter_id')->withPivot('points');
+    }
+
 }

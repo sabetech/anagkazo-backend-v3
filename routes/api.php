@@ -27,3 +27,4 @@ Route::post('/health', function () {
 });
 
 Route::post('/pwa/verify-indexnumber', [StudentAPIController::class, 'verifyIndexNumber']);
+Route::get('/pwa/pastoral-points/{indexNumber}', [StudentAPIController::class, 'getPastoralPoints']);
