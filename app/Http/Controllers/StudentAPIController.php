@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Helpers\FedenaAPIHelper;
+use App\Models\User;
 
 class StudentAPIController extends Controller
 {
