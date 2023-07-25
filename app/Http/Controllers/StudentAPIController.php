@@ -47,6 +47,41 @@ class StudentAPIController extends Controller
         ]);
     }
 
+    public function authenticate(Request $request)
+    {
+        $indexNumber = $request->get('index_number');
+        $pin = $request->get('passcode');
+
+        $student = Student::where('index_number', $indexNumber)->first();
+        if (!$student) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid Index Number. Please check and try again.'
+                ], 401);
+        }
+
+        $user = User::where('email', $student->email_address)
+            ->where('password', $pin)->first();
+        
+        if ($user){
+            
+            $user->api_token = Str::random(60);
+            $user->save();
+
+            return response()->json([
+                'user' => $student,
+                'token' => $user->api_token,
+                'success' => true
+            ], 200);
+        }
+        
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid Passcode. Please check and try again.'
+            ], 401);
+    }
+
+
     public function getPastoralPoints($indexNumber) {
         $student = Student::where('index_number', $indexNumber)->first();
         return $student->pastoralPoints;
