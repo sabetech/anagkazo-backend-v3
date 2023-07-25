@@ -30,6 +30,7 @@ COPY . .
 
 # Install Composer and run "composer install" to install dependencies
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# RUN composer update
 RUN composer install --no-interaction --no-scripts --no-plugins --no-progress --prefer-dist
 
 # Set the ownership and permissions for the application directory
