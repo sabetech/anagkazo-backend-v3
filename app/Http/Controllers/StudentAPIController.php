@@ -23,7 +23,7 @@ class StudentAPIController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Invalid Index Number. Please check and try again.'
-                    ], 400);
+                    ], 401);
             
             //save student
             $student = Student::create([
@@ -37,7 +37,7 @@ class StudentAPIController extends Controller
                 "country" => $student->country,
             ]);
 
-            //TODO: save photo in the background and update the student record
+            //TODO: save photo in the background in cloudinary and update the student record
         }
 
         $student->already_exists = $alreadyExists;
@@ -50,6 +50,33 @@ class StudentAPIController extends Controller
     public function getPastoralPoints($indexNumber) {
         $student = Student::where('index_number', $indexNumber)->first();
         return $student->pastoralPoints;
+    }
+
+    public function postBussingDataFromClientForm(Request $request) {
+        $date = date("Y-m-d", strtotime($request->get('bussing-date')));
+        $student = Student::find($request->get('find-student'));
+        if (!$student) return response()->json("Could not find student o!");
+
+        $bussingDataRow = [];
+
+        $bussingDataRow['st_attn'] = $request->get('present') === 'Yes' ? 1 : 0;
+        $bussingDataRow['twn_attn'] = intVal($request->get('number_bussed'));
+        $bussingDataRow['index_number'] = $student->index_number;
+
+        Log::info("Bussing Date: " . $date);
+        Log::info($bussingDataRow);
+
+        $bussingSaved = Bussing::updateOrInsert($bussingDataRow, $date);
+
+        if ($bussingSaved) {
+            $student = Student::find($bussingSaved->student_id);
+
+            return view('v2.admin_panel.prayer_track_response')
+                ->with('bussing', $bussingDataRow['twn_attn'])
+                ->with('pageTitle', 'Bussing Entry')
+                ->with('date', date("M d, Y", strtotime($date)))
+                ->with('student', $student);
+        }
     }
 
 
