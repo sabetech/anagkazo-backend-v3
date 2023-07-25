@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Helpers\FedenaAPIHelper;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class StudentAPIController extends Controller
 {
