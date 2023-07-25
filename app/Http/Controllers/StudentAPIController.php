@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Helpers\FedenaAPIHelper;
 use App\Models\User;
 use Illuminate\Support\Str;
+use App\Models\PastoralPoint;
 
 class StudentAPIController extends Controller
 {
