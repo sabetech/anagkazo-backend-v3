@@ -84,6 +84,10 @@ class StudentAPIController extends Controller
             ], 401);
     }
 
+    public function getBussing($indexNumber) {
+        $student = Student::where('index_number', $indexNumber)->first();
+        return $student->bussing;
+    }
 
     public function getPastoralPoints($indexNumber) {
         $student = Student::where('index_number', $indexNumber)->first();

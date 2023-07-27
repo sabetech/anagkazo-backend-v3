@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\PastoralPoint;
+use App\Models\Bussing;
 
 class Student extends Model
 {
@@ -19,6 +20,11 @@ class Student extends Model
     public function pastoralPoints()
     {
         return $this->belongsToMany(PastoralPoint::class, 'student_point', 'student_id', 'parameter_id')->withPivot('points');
+    }
+
+    public function bussing()
+    {
+        return $this->hasMany(Bussing::class, 'student_id', 'id');
     }
 
 }
