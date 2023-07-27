@@ -86,7 +86,18 @@ class StudentAPIController extends Controller
 
     public function getBussing($indexNumber) {
         $student = Student::where('index_number', $indexNumber)->first();
-        return $student->bussing;
+        if (!$student) return response()->json(
+            [
+                'success' => false,
+                'message' => 'Invalid Index Number. Please check and try again.'
+            ], 400
+        );
+        return response()->json(
+            [
+                'success' => true,
+                'data' => $student->bussing
+            ], 200
+        );
     }
 
     public function getPastoralPoints($indexNumber) {
