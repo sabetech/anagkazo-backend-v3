@@ -8,6 +8,7 @@ use App\Helpers\FedenaAPIHelper;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\PastoralPoint;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class StudentAPIController extends Controller
 {
