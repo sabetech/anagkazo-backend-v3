@@ -30,3 +30,5 @@ Route::post('/pwa/verify-indexnumber', [StudentAPIController::class, 'verifyInde
 Route::post('/pwa/authenticate', [StudentAPIController::class, 'authenticate']);
 Route::get('/pwa/pastoral-points/{indexNumber}', [StudentAPIController::class, 'getPastoralPoints']);
 Route::get('/pwa/bussing/{indexNumber}', [StudentAPIController::class, 'getBussing']);
+
+Route::post('/pwa/bussing/{indexNumber}', [StudentAPIController::class, 'postBussing']);

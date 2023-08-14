@@ -117,6 +117,46 @@ class StudentAPIController extends Controller
         );
     }
 
+    public function postBussing(Request $request, $indexNumber) {
+        $student = Student::where('index_number', $indexNumber)->first();
+        if (!$student) return response()->json(
+            [
+                'success' => false,
+                'message' => 'Invalid Index Number. Please check and try again.'
+            ], 400
+        );
+
+        $bussingDataRow = [];
+
+        //get uploaded image from request
+        $uploadedFileUrl = Cloudinary::upload($request->file('bussing_image')->getRealPath(), [
+            'folder' => 'Anagkazo.Apps'
+        ])->getSecurePath();
+
+
+        $bussingDataRow['st_attn'] = 1;
+        $bussingDataRow['twn_attn'] = intVal($request->get('number_bussed'));
+        $bussingDataRow['index_number'] = $student->index_number;
+
+        $bussingSaved = Bussing::updateOrInsert($bussingDataRow, date("Y-m-d"));
+
+        if ($bussingSaved) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => $bussingSaved
+                ], 200
+            );
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'message' => 'Could not save bussing data. Please try again.'
+            ], 400
+        );
+    }
+
     public function postBussingDataFromClientForm(Request $request) {
         $date = date("Y-m-d", strtotime($request->get('bussing-date')));
         $student = Student::find($request->get('find-student'));
