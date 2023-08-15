@@ -139,6 +139,13 @@ class StudentAPIController extends Controller
             $uploadedFileUrl = Cloudinary::upload($request->file('bussing_image')->getRealPath(), [
                 'folder' => 'Anagkazo.Apps'
             ])->getSecurePath();
+        }else{
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Could not save bussing Image. Please try again.'
+                ], 400
+            );
         }
         
 
