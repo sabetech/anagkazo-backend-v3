@@ -8,6 +8,7 @@ use App\Helpers\FedenaAPIHelper;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\PastoralPoint;
+use App\Models\Bussing;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class StudentAPIController extends Controller
@@ -93,6 +94,7 @@ class StudentAPIController extends Controller
                 'message' => 'Invalid Index Number. Please check and try again.'
             ], 400
         );
+
         return response()->json(
             [
                 'success' => true,
@@ -127,13 +129,14 @@ class StudentAPIController extends Controller
             ], 400
         );
 
+        Log::info($request->all());
+
         $bussingDataRow = [];
 
         //get uploaded image from request
         $uploadedFileUrl = Cloudinary::upload($request->file('bussing_image')->getRealPath(), [
             'folder' => 'Anagkazo.Apps'
         ])->getSecurePath();
-
 
         $bussingDataRow['st_attn'] = 1;
         $bussingDataRow['twn_attn'] = intVal($request->get('number_bussed'));
