@@ -135,9 +135,12 @@ class StudentAPIController extends Controller
         $bussingDataRow = [];
 
         //get uploaded image from request
-        $uploadedFileUrl = Cloudinary::upload($request->file('bussing_image')->getRealPath(), [
-            'folder' => 'Anagkazo.Apps'
-        ])->getSecurePath();
+        if ($request->file('bussing_image')) {
+            $uploadedFileUrl = Cloudinary::upload($request->file('bussing_image')->getRealPath(), [
+                'folder' => 'Anagkazo.Apps'
+            ])->getSecurePath();
+        }
+        
 
         $bussingDataRow['st_attn'] = 1;
         $bussingDataRow['twn_attn'] = intVal($request->get('number_bussed'));
