@@ -28,6 +28,7 @@ class Bussing extends Model
 			//update
 			$bussingData->present = $bussingDataRow['st_attn'];
 			$bussingData->number_bussed = $bussingDataRow['twn_attn'];
+            $bussingData->cloudinary_img_id = $bussingDataRow['cloudinary_img_id'];
 			$bussingData->save();
 		} else {
 			//create new
@@ -38,10 +39,10 @@ class Bussing extends Model
 			$bussingData->class_id = $existingStudent->class_id;
 			$bussingData->present = $bussingDataRow['st_attn'];
 			$bussingData->number_bussed = $bussingDataRow['twn_attn'];
+            $bussingData->cloudinary_img_id = $bussingDataRow['cloudinary_img_id'];
 
 			$bussingData->save();
 		}
-
 
 		return $bussingData;
 	}

@@ -130,10 +130,9 @@ class StudentAPIController extends Controller
             ], 400
         );
 
-        Log::info($request->all());
-
         $bussingDataRow = [];
 
+        $uploadedFileUrl = null;
         //get uploaded image from request
         if ($request->file('bussing_image')) {
             $uploadedFileUrl = Cloudinary::upload($request->file('bussing_image')->getRealPath(), [
@@ -152,8 +151,9 @@ class StudentAPIController extends Controller
         $bussingDataRow['st_attn'] = 1;
         $bussingDataRow['twn_attn'] = intVal($request->get('number_bussed'));
         $bussingDataRow['index_number'] = $student->index_number;
+        $bussingDataRow['cloudinary_img_id'] = $uploadedFileUrl;
 
-        $bussingSaved = Bussing::updateOrInsert($bussingDataRow, date("Y-m-d"));
+        $bussingSaved = Bussing::updateOrInsert($bussingDataRow, $request->get('date'));
 
         if ($bussingSaved) {
             return response()->json(
