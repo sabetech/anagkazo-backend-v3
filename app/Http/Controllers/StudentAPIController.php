@@ -154,6 +154,8 @@ class StudentAPIController extends Controller
         $bussingDataRow['index_number'] = $student->index_number;
         $bussingDataRow['cloudinary_img_id'] = $uploadedFileUrl;
 
+        Log::info($bussingDataRow);
+
         $bussingSaved = Bussing::updateOrInsert($bussingDataRow, $request->get('date'));
 
         if ($bussingSaved) {

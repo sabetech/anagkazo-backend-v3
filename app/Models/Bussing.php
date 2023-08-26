@@ -24,6 +24,8 @@ class Bussing extends Model
 			->where('student_id', $existingStudent->id)
 			->first();
 
+		Log::info($bussingDataRow);
+		
 		if ($bussingData) {
 			//update
 			$bussingData->present = $bussingDataRow['st_attn'];
