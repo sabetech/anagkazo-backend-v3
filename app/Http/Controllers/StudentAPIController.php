@@ -147,7 +147,7 @@ class StudentAPIController extends Controller
             );
         }
         
-        Log::info("UPloadedFILEURL:::", $uploadedFileUrl);
+        Log::info($uploadedFileUrl);
 
         $bussingDataRow['st_attn'] = 1;
         $bussingDataRow['twn_attn'] = intVal($request->get('number_bussed'));
