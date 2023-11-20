@@ -9,7 +9,7 @@ class StudentAttendance extends Model
 {
     use HasFactory;
     protected $table = 'student_attendance';
-    protected $guarded = 'id';
+    protected $guarded = ['id'];
 
-    
+
 }
