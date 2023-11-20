@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\PastoralPoint;
 use App\Models\Bussing;
-use App\Models\StudentAttendance;
+use App\Models\AnagkazoAttendance;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
 
@@ -212,7 +212,7 @@ class StudentAPIController extends Controller
             ], 404
         );
 
-        StudentAttendance::updateOrCreate([
+        AnagkazoAttendance::updateOrCreate([
             'student_id' => $student->id,
             'date_time' => $request->get('date'),
             'event' => $request->get('event'),
