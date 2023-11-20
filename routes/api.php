@@ -26,9 +26,11 @@ Route::post('/health', function () {
     return response()->json(['status' => 'ok', 'method' => 'POST']);
 });
 
-Route::post('/pwa/verify-indexnumber', [StudentAPIController::class, 'verifyIndexNumber']);
-Route::post('/pwa/authenticate', [StudentAPIController::class, 'authenticate']);
-Route::get('/pwa/pastoral-points/{indexNumber}', [StudentAPIController::class, 'getPastoralPoints']);
-Route::get('/pwa/bussing/{indexNumber}', [StudentAPIController::class, 'getBussing']);
-
-Route::post('/pwa/bussing/{indexNumber}', [StudentAPIController::class, 'postBussing']);
+Route::group(['prefix'=>'pwa'], function (){
+    Route::post('verify-indexnumber', [StudentAPIController::class, 'verifyIndexNumber']);
+    Route::post('authenticate', [StudentAPIController::class, 'authenticate']);
+    Route::get('pastoral-points/{indexNumber}', [StudentAPIController::class, 'getPastoralPoints']);
+    Route::get('bussing/{indexNumber}', [StudentAPIController::class, 'getBussing']);
+    Route::post('attendance/{id}', [StudentAPIController::class, 'postAttendance']);
+    Route::post('bussing/{indexNumber}', [StudentAPIController::class, 'postBussing']);
+});

@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\PastoralPoint;
 use App\Models\Bussing;
+use App\Models\StudentAttendance;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
 
@@ -202,5 +203,34 @@ class StudentAPIController extends Controller
         }
     }
 
+    public function postAttendance($id, Request $request) {
+        $student = Student::find($id);
+        if (!$student) return response()->json(
+            [
+                'success' => false,
+                'message' => 'Student Not Found! ID is not valid. Please check and try again.'
+            ], 404
+        );
+
+        StudentAttendance::updateOrCreate([
+            'student_id' => $student->id,
+            'date_time' => $request->get('date'),
+            'event' => $request->get('event')
+        ], [
+            'student_admission_number' => $student->index_number,
+            'class_id' => $student->class_id,
+            'attendance_status' => 'On Time',
+            'service_type' => 'regular',
+            'todays_qr_salt' => ''
+        ]);
+
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Attendance Saved successfully'
+            ], 200
+        );
+    }
 
 }
