@@ -13,11 +13,11 @@ return new class extends Migration
     {
         //
         Schema::table('student_attendance', function (Blueprint $table) {
-            // $table->dropColumn('student_admission_number');
-            // $table->dropColumn('class_id');
-            // $table->dropColumn('todays_qr_salt');
-            // $table->dropColumn('service_type');
-            // $table->dropColumn('todays_qr_salt');
+            $table->dropColumn('student_admission_number');
+            $table->dropColumn('class_id');
+            $table->dropColumn('todays_qr_salt');
+            $table->dropColumn('service_type');
+            $table->dropColumn('todays_qr_salt');
             $table->dropColumn('attendance_status');
             $table->renameColumn('date_time', 'date');
             
