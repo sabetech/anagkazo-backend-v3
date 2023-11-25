@@ -20,9 +20,14 @@ return new class extends Migration
             $table->dropColumn('todays_qr_salt');
             $table->dropColumn('attendance_status');
             $table->renameColumn('date_time', 'date');
+            
+        });
+
+        Schema::table('student_attendance', function (Blueprint $table) {
             $table->time('time')->after('date');
             $table->time('late_condition')->after('time')->nullable();
         });
+        
 
         Schema::rename('student_attendance', 'anagkazo_attendance');
     }
