@@ -212,6 +212,9 @@ class StudentAPIController extends Controller
             ], 404
         );
 
+        Log::info("Attendance Data");
+        Log::info($request->all());
+
         AnagkazoAttendance::updateOrCreate([
             'student_id' => $student->id,
             'date' => $request->get('date'),
