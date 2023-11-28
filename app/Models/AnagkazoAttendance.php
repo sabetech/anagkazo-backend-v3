@@ -9,7 +9,7 @@ class AnagkazoAttendance extends Model
 {
     use HasFactory;
     
-    protected $connection = 'mysql2';
+    // protected $connection = 'mysql2';
     protected $table = 'anagkazo_attendance';
     
     

@@ -214,14 +214,11 @@ class StudentAPIController extends Controller
 
         AnagkazoAttendance::updateOrCreate([
             'student_id' => $student->id,
-            'date_time' => $request->get('date'),
+            'date' => $request->get('date'),
             'event' => $request->get('event'),
         ], [
-            'student_admission_number' => $student->index_number,
-            'class_id' => $student->class_id,
-            'attendance_status' => 'On Time',
-            'service_type' => 'regular',
-            'todays_qr_salt' => '',
+            'late_condition' => $request->get('late_condition', null),
+            'time' => date('H:i:s'),
         ]);
 
 
