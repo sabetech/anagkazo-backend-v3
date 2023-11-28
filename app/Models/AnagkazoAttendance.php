@@ -11,6 +11,7 @@ class AnagkazoAttendance extends Model
     
     // protected $connection = 'mysql2';
     protected $table = 'anagkazo_attendance';
+    protected $guarded = ['id'];
     
     
 }
