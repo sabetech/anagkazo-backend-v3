@@ -212,9 +212,6 @@ class StudentAPIController extends Controller
             ], 404
         );
 
-        Log::info("Attendance Data");
-        Log::info($request->all());
-
         AnagkazoAttendance::updateOrCreate([
             'student_id' => $student->id,
             'date' => $request->get('date'),
@@ -229,6 +226,28 @@ class StudentAPIController extends Controller
             [
                 'success' => true,
                 'message' => 'Attendance Saved successfully'
+            ], 200
+        );
+    }
+
+    public function getAttendance($indexNumber, Request $request) {
+
+        $student = Student::where('index_number', $indexNumber)->first();
+        if (!$student) return response()->json(
+            [
+                'success' => false,
+                'message' => 'Student Not Found! ID is not valid. Please check and try again.'
+            ], 404
+        );
+
+        $attendance = AnagkazoAttendance::where('student_id', $student->id)
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return response()->json(
+            [
+                'success' => true,
+                'data' => $attendance
             ], 200
         );
     }
