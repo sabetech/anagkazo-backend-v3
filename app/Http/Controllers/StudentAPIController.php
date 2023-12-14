@@ -231,6 +231,7 @@ class StudentAPIController extends Controller
     }
 
     public function getAttendance($indexNumber, Request $request) {
+        $event = $request->get('event');
 
         $student = Student::where('index_number', $indexNumber)->first();
         if (!$student) return response()->json(
@@ -241,6 +242,7 @@ class StudentAPIController extends Controller
         );
 
         $attendance = AnagkazoAttendance::where('student_id', $student->id)
+            ->where('event', $event)
             ->orderBy('date', 'desc')
             ->get();
 
