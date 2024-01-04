@@ -212,6 +212,7 @@ class StudentAPIController extends Controller
             ], 404
         );
 
+        Log::info("SCANNINFO::",$request->all());
         $result = AnagkazoAttendance::handleScanInformation($student, $request->all());
 
         return response()->json(

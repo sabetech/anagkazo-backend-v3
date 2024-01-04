@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class AnagkazoAttendance extends Model
 {
@@ -14,9 +15,15 @@ class AnagkazoAttendance extends Model
     
     public static function handleScanInformation($student, $scanInfo) {
         
+        Log::info(json_encode($scanInfo));
+
         $event = self::getEvent($scanInfo['event']);
         $inOrOut = self::inOrOut($scanInfo['event']);
         $lateCondition = $scanInfo['late_condition'];
+
+        Log::info("EVENT::", $event);
+        Log::info("IN OR OUT::", $inOrOut);
+        Log::info("LATE CONDITION::", $lateCondition);
 
         switch($inOrOut) {
             case "IN":
@@ -40,6 +47,8 @@ class AnagkazoAttendance extends Model
             'late_condition' => $lateCondition,
         ]);
 
+        Log::info("SAVED::", $saved);
+
         if ($saved) 
             return true;
          return false;
@@ -54,6 +63,8 @@ class AnagkazoAttendance extends Model
         [
             'time_out' => date('H:i:s'),
         ]);
+
+        Log::info("SAVED::", $saved);
 
         if ($saved) 
             return true;
