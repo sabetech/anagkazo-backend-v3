@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('attendance_2', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
+            $table->unsignedBigInteger('student_id');
             $table->date('date');
             $table->time('time_in');
             $table->time('time_out');
