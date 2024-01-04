@@ -212,15 +212,7 @@ class StudentAPIController extends Controller
             ], 404
         );
 
-        AnagkazoAttendance::updateOrCreate([
-            'student_id' => $student->id,
-            'date' => $request->get('date'),
-            'event' => $request->get('event'),
-        ], [
-            'late_condition' => $request->get('late_condition', null),
-            'time' => date('H:i:s'),
-        ]);
-
+        $result = AnagkazoAttendance::handleScanInformation($student, $request->all());
 
         return response()->json(
             [
