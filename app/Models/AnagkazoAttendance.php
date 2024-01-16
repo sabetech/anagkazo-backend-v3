@@ -22,10 +22,10 @@ class AnagkazoAttendance extends Model
         $lateCondition = $scanInfo['late_condition'];
         $date = $scanInfo['date'];
 
-        Log::info("EVENT::", $event);
-        Log::info("IN OR OUT::", $inOrOut);
-        Log::info("LATE CONDITION::", $lateCondition);
-        Log::info($date);
+        Log::info("EVENT::" . $event);
+        Log::info("IN OR OUT::". $inOrOut);
+        Log::info("LATE CONDITION::". $lateCondition);
+        Log::info("DATE::".$date);
 
         switch($inOrOut) {
             case "IN":
