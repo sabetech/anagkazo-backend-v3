@@ -17,20 +17,22 @@ class AnagkazoAttendance extends Model
         
         Log::info(json_encode($scanInfo));
 
-        $event = self::getEvent($scanInfo['event']);
-        $inOrOut = self::inOrOut($scanInfo['event']);
+        $event = $scanInfo['event'];
+        $inOrOut = self::inOrOut($scanInfo['mode']);
         $lateCondition = $scanInfo['late_condition'];
+        $date = $scanInfo['date'];
 
         Log::info("EVENT::", $event);
         Log::info("IN OR OUT::", $inOrOut);
         Log::info("LATE CONDITION::", $lateCondition);
+        Log::info("DATE::", $date);
 
         switch($inOrOut) {
             case "IN":
-                self::saveScanIN($student, $event, $lateCondition);
+                self::saveScanIN($student, $event, $date, $lateCondition);
                 break;
             case "OUT":
-                self::saveScanOUT($student, $event);
+                self::saveScanOUT($student, $event, $date);
                 break;
         }
         
@@ -85,8 +87,5 @@ class AnagkazoAttendance extends Model
             return substr($scannedEvent, strrpos($scannedEvent, '_IN'));
         }
         substr($scannedEvent, strrpos($scannedEvent, '_OUT'));
-    }
-
-
-    
+    }    
 }
