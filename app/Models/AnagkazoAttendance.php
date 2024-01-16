@@ -49,8 +49,6 @@ class AnagkazoAttendance extends Model
             'late_condition' => $lateCondition,
         ]);
 
-        Log::info("SAVED::", $saved);
-
         if ($saved) 
             return true;
          return false;
@@ -65,8 +63,6 @@ class AnagkazoAttendance extends Model
         [
             'time_out' => date('H:i:s'),
         ]);
-
-        Log::info("SAVED::", $saved);
 
         if ($saved) 
             return true;
