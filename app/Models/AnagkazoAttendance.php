@@ -18,14 +18,14 @@ class AnagkazoAttendance extends Model
         Log::info(json_encode($scanInfo));
 
         $event = $scanInfo['event'];
-        $inOrOut = self::inOrOut($scanInfo['mode']);
+        $inOrOut = $scanInfo['mode'];
         $lateCondition = $scanInfo['late_condition'];
         $date = $scanInfo['date'];
 
         Log::info("EVENT::", $event);
         Log::info("IN OR OUT::", $inOrOut);
         Log::info("LATE CONDITION::", $lateCondition);
-        Log::info("DATE::", $date);
+        Log::info($date);
 
         switch($inOrOut) {
             case "IN":
@@ -73,19 +73,19 @@ class AnagkazoAttendance extends Model
         return false;
     }
 
-    public static function inOrOut($scannedEvent){
-        if (!strrpos($scannedEvent, '_IN')) {
-            return 'OUT';
-        } else {
-            return 'IN';
-        }
-    }
+    // public static function inOrOut($scannedEvent){
+    //     if (!strrpos($scannedEvent, '_IN')) {
+    //         return 'OUT';
+    //     } else {
+    //         return 'IN';
+    //     }
+    // }
 
-    public static function getEvent($scannedEvent) {
-        $event = false;
-        if (strrpos($scannedEvent, '_IN')) {
-            return substr($scannedEvent, strrpos($scannedEvent, '_IN'));
-        }
-        substr($scannedEvent, strrpos($scannedEvent, '_OUT'));
-    }    
+    // public static function getEvent($scannedEvent) {
+    //     $event = false;
+    //     if (strrpos($scannedEvent, '_IN')) {
+    //         return substr($scannedEvent, strrpos($scannedEvent, '_IN'));
+    //     }
+    //     substr($scannedEvent, strrpos($scannedEvent, '_OUT'));
+    // }    
 }
