@@ -16,7 +16,6 @@ return new class extends Migration
             $table->time('time_in')->nullable()->change();
             $table->time('time_out')->nullable()->change();
             $table->time('late_condition')->nullable()->change();
-            $table->timestamps();
         });
     }
 
