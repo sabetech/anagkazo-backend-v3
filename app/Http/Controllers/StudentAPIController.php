@@ -235,7 +235,7 @@ class StudentAPIController extends Controller
         );
 
         $attendance = AnagkazoAttendance::where('student_id', $student->id)
-            ->where('event', $event)
+            ->where('event', 'LIKE', "$event%")
             ->orderBy('date', 'desc')
             ->get();
 
