@@ -21,6 +21,10 @@ class AnagkazoAttendance extends Model
         $inOrOut = $scanInfo['mode'];
         $lateCondition = $scanInfo['late_condition'];
         $date = $scanInfo['date'];
+        
+        if ($scanInfo['date'] === 'null'){
+            $date = date("Y-m-d");
+        }
 
         Log::info("EVENT::" . $event);
         Log::info("IN OR OUT::". $inOrOut);
