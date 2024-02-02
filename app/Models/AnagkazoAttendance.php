@@ -22,8 +22,12 @@ class AnagkazoAttendance extends Model
         $lateCondition = $scanInfo['late_condition'];
         $date = $scanInfo['date'];
         
-        if ($scanInfo['date'] === 'null'){
+        if (strtolower($scanInfo['date']) === 'null'){
             $date = date("Y-m-d");
+        }
+
+        if (strtolower($scanInfo['late_condition']) === 'null'){
+            $lateCondition = null;
         }
 
         Log::info("EVENT::" . $event);
