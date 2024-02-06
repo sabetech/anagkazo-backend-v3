@@ -48,13 +48,14 @@ class StudentAPIController extends Controller
             $passcode = rand(1000, 9999);
 
             $user = User::create([
+                'name' => $student->name,
                 'email' => $student->email_address,
                 'password' => $passcode,
                 'api_token' => Str::random(60)
             ]);
 
             $student->passcode = $passcode;
-            
+
             return response()->json([
                 'user' => $student,
                 'token' => $user->api_token,
