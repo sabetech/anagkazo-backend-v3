@@ -51,7 +51,7 @@ class StudentAPIController extends Controller
                 'name' => $student->name,
                 'email' => $student->email_address,
                 'password' => $passcode,
-                'user_type' => 2,
+                'user_type' => 0,
                 'api_token' => Str::random(60)
             ]);
 
