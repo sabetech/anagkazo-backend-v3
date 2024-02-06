@@ -44,6 +44,21 @@ class StudentAPIController extends Controller
                 "country" => $student->country,
             ]);
 
+            //create a passcode on the fly and give it to the student as part of the response.
+            $passcode = rand(1000, 9999);
+
+            $user = User::create([
+                'email' => $student->email_address,
+                'password' => $passcode,
+                'api_token' => Str::random(60)
+            ]);
+
+            return response()->json([
+                'user' => $student,
+                'token' => $user->api_token,
+                'passcode' => $passcode,
+                'success' => true
+            ], 200);
             //TODO: save photo in the background in cloudinary and update the student record
         }
 
