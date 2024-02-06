@@ -53,10 +53,11 @@ class StudentAPIController extends Controller
                 'api_token' => Str::random(60)
             ]);
 
+            $student->passcode = $passcode;
+            
             return response()->json([
                 'user' => $student,
                 'token' => $user->api_token,
-                'passcode' => $passcode,
                 'success' => true
             ], 200);
             //TODO: save photo in the background in cloudinary and update the student record
