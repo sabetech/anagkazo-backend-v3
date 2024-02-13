@@ -77,19 +77,8 @@ class AnagkazoAttendance extends Model
         return false;
     }
 
-    // public static function inOrOut($scannedEvent){
-    //     if (!strrpos($scannedEvent, '_IN')) {
-    //         return 'OUT';
-    //     } else {
-    //         return 'IN';
-    //     }
-    // }
+    public function synchronizeAttendance($attendanceData) {
+        Log::info($attendanceData);
+    }
 
-    // public static function getEvent($scannedEvent) {
-    //     $event = false;
-    //     if (strrpos($scannedEvent, '_IN')) {
-    //         return substr($scannedEvent, strrpos($scannedEvent, '_IN'));
-    //     }
-    //     substr($scannedEvent, strrpos($scannedEvent, '_OUT'));
-    // }    
 }

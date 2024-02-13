@@ -264,4 +264,19 @@ class StudentAPIController extends Controller
         );
     }
 
+    public function syncAttendance($indexNumber, Request $request) {
+        $student = Student::where('index_number', $indexNumber)->first();
+        if (!$student) return response()->json(
+            [
+                'success' => false,
+                'message' => 'Student Not Found! ID is not valid. Please check and try again.'
+            ], 404
+        );
+
+        $unsyncedData = $request->get('unsyncedData');
+
+        AnagkazoAttendance::synchronizeAttendance($unsyncedData);
+
+    }
+
 }

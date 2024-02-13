@@ -32,6 +32,7 @@ Route::group(['prefix'=>'pwa'], function (){
     Route::get('pastoral-points/{indexNumber}', [StudentAPIController::class, 'getPastoralPoints']);
     Route::get('bussing/{indexNumber}', [StudentAPIController::class, 'getBussing']);
     Route::post('attendance/{id}', [StudentAPIController::class, 'postAttendance']);
+    Route::post('attendance/{indexNumber}/sync', [StudentAPIController::class, 'syncAttendance']);
     Route::get('attendance/{indexNumber}', [StudentAPIController::class, 'getAttendance']);
     Route::post('bussing/{indexNumber}', [StudentAPIController::class, 'postBussing']);
 });
