@@ -77,8 +77,16 @@ class AnagkazoAttendance extends Model
         return false;
     }
 
-    public function synchronizeAttendance($attendanceData) {
+    public static function synchronizeAttendance($attendanceData) {
         Log::info($attendanceData);
+        /*
+            [
+                date =>
+                event =>
+                time_in =>
+                time_out =>
+            ]
+        */ 
     }
 
 }
