@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('/form/fellowship-bussing', 'StudentClientController@getFellowshipBussingForm')->name('getFellowshipBussingForm');
+Route::get('attendance/export', 'StudentAPIController@exportAttendance')->name('exportAttendance');

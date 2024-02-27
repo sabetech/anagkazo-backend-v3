@@ -31,7 +31,7 @@ class StudentAPIController extends Controller
                     'success' => false,
                     'message' => 'Invalid Index Number. Please check and try again.'
                     ], 401);
-            
+
             //save student
             $student = Student::create([
                 "index_number" => $student->index_number,
@@ -86,9 +86,9 @@ class StudentAPIController extends Controller
 
         $user = User::where('email', $student->email_address)
             ->where('password', $pin)->first();
-        
+
         if ($user){
-            
+
             $user->api_token = Str::random(60);
             $user->save();
 
@@ -98,7 +98,7 @@ class StudentAPIController extends Controller
                 'success' => true
             ], 200);
         }
-        
+
         return response()->json([
             'success' => false,
             'message' => 'Invalid Passcode. Please check and try again.'
@@ -164,7 +164,7 @@ class StudentAPIController extends Controller
                 ], 400
             );
         }
-        
+
         Log::info($uploadedFileUrl);
 
         $bussingDataRow['st_attn'] = 1;
@@ -276,6 +276,10 @@ class StudentAPIController extends Controller
         $unsyncedData = $request->get('unsyncedData');
 
         AnagkazoAttendance::synchronizeAttendance($unsyncedData);
+
+    }
+
+    public function exportAttendance(Request $request) {
 
     }
 

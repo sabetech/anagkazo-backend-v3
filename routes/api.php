@@ -26,7 +26,7 @@ Route::post('/health', function () {
     return response()->json(['status' => 'ok', 'method' => 'POST']);
 });
 
-Route::group(['prefix'=>'pwa'], function (){
+Route::group(['prefix'=>'pwa'], function () {
     Route::post('verify-indexnumber', [StudentAPIController::class, 'verifyIndexNumber']);
     Route::post('authenticate', [StudentAPIController::class, 'authenticate']);
     Route::get('pastoral-points/{indexNumber}', [StudentAPIController::class, 'getPastoralPoints']);

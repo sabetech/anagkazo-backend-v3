@@ -15,7 +15,7 @@ class AnagkazoAttendance extends Model
     
     public static function handleScanInformation($student, $scanInfo) {
         
-        Log::info(json_encode($scanInfo));
+        Log::info($scanInfo);
 
         $event = $scanInfo['event'];
         $inOrOut = $scanInfo['mode'];
