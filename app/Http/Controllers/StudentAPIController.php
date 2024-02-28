@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\PastoralPoint;
 use App\Models\Bussing;
 use App\Models\AnagkazoAttendance;
+use App\Exports\AttendanceExport;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
 
@@ -281,6 +282,36 @@ class StudentAPIController extends Controller
 
     public function exportAttendance(Request $request) {
 
+        $from = $request->get('fromdate');
+        $to = $request->get('todate');
+
+        $fromBeginning = $request->get("frombeginning", false);
+
+        $calculate_point = $request->get("calculate_point", false);
+
+        $event = $request->get('event');
+        $classId = $request->get('classes');
+
+        list($dateFrom, $dateTo) = $this->getExportDateRange($fromDate, $toDate, $event, $fromBeginning, $classId);
+
+        return (new GenerateAttendanceReport($dateFrom, $dateTo, $event, $classId, $calculate_point))->download("$event-$classId-export.xlsx");
+
+    }
+
+    public function getExportDateRange($fromDate, $toDate, $event, $fromBeginning = false, $classId = 'all')
+    {
+        if (!$fromBeginning) {
+            return [$fromDate, $toDate];
+        }
+
+        $dateFrom = AnagkazoAttendance::getStartingDate($event, $classId);
+        $dateTo = AnagkazoAttendance::getEndDate($event, $classId);
+
+        return [$dateFrom, $dateTo];
+    }
+
+    public function classes() {
+        return StudentClass::all();
     }
 
 }
