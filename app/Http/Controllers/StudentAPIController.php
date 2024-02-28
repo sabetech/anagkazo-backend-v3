@@ -294,7 +294,7 @@ class StudentAPIController extends Controller
         $event = $request->get('event');
         $classId = $request->get('classes');
 
-        list($dateFrom, $dateTo) = $this->getExportDateRange($fromDate, $toDate, $event, $fromBeginning, $classId);
+        list($dateFrom, $dateTo) = $this->getExportDateRange($from, $to, $event, $fromBeginning, $classId);
 
         return (new GenerateAttendanceReport($dateFrom, $dateTo, $event, $classId, $calculate_point))->download("$event-$classId-export.xlsx");
 
