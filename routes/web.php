@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/form/fellowship-bussing', 'StudentClientController@getFellowshipBussingForm')->name('getFellowshipBussingForm');
-Route::get('/anagkazo/attendance/reports', 'StudentAPIController@exportAttendance')->name('exportAttendance');
+Route::get('/anagkazo/attendance/reports', [StudentAPIController::class, 'exportAttendance'])->name('exportAttendance');
