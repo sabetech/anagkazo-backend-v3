@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\StudentClass;
 use App\Helpers\FedenaAPIHelper;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -13,6 +14,7 @@ use App\Models\AnagkazoAttendance;
 use App\Exports\AttendanceExport;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
+
 
 class StudentAPIController extends Controller
 {
