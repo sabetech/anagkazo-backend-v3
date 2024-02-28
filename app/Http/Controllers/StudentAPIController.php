@@ -12,6 +12,7 @@ use App\Models\PastoralPoint;
 use App\Models\Bussing;
 use App\Models\AnagkazoAttendance;
 use App\Exports\AttendanceExport;
+use App\Exports\GenerateAttendanceReport;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
 
