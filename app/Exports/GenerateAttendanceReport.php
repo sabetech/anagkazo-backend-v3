@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class GenerateAttendanceReport implements FromCollection, WithHeadings
 {
-    use Maatwebsite\Excel\Concerns\Exportable;
+    use Exportable;
     protected $datefrom, $dateTo, $event, $headings, $classId, $calculatePointFlag, $headingDates;
 
     public function __construct($datefrom, $dateTo, $event, $classId, $calculatePoint)
