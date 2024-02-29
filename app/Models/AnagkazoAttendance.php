@@ -136,13 +136,17 @@ class AnagkazoAttendance extends Model
             $row[] = $student->batch;
 
             foreach ($dates as $date) {
-                $attnRecord = $attendanceRecords->search(function ($rec, $key) use ($student) {
+                $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student) {
                     return $rec->student_id == $student->id;
                 });
 
                 if ($attnRecord) {
                     if (($attnRecord->time_in) && ($attnRecord->time_out)) {
-                        $row[] = "PRESENT [ " . $attnRecord->time_in . " ]";
+                        $row[] = "PRESENT [ IN: $attnRecord->time_in ] OUT: $attnRecord->time_in";
+                    }else if ($attnRecord->time_in) {
+                        $row[] = "ABSENT [IN: $attnRecord->time_in]";
+                    }else if ($attnRecord->time_out) {
+                        $row[] = "ABSENT [OUT: $attnRecord->time_out]";
                     }else {
                         $row[] = "ABSENT";
                     }
