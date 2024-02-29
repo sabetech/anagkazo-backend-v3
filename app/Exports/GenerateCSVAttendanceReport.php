@@ -35,7 +35,7 @@ namespace App\Exports;
             $myCollection = $this->collection();
 
             foreach($myCollection as $row) {
-
+                Log::info("ROWINFO:::", $row);
                 fputcsv($handle, $row);
             }
 
