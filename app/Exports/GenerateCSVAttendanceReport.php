@@ -29,19 +29,21 @@ namespace App\Exports;
                 "Expires"             => "0"
             );
 
-            $handle = fopen('php://output', 'w');
+            $tempFile = tempnam(sys_get_temp_dir(), 'csv');
+
+            $handle = fopen($tempFile, 'w');
+
             fputcsv($handle, $this->headings());
 
             $myCollection = $this->collection();
 
             foreach($myCollection as $row) {
-                Log::info("ROWINFO:::", $row);
                 fputcsv($handle, $row);
             }
 
             fclose($handle);
 
-            return Response::make('', 200, $headers);
+            return response()->file($tempFile, $headers);
         }
 
         public function collection() {
