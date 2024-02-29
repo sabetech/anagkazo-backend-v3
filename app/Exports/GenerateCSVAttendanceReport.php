@@ -21,11 +21,13 @@ namespace App\Exports;
 
         public function downloadCSV($fileName) {
 
-
-            $headers = [
-                'Content-Type' => 'text/csv',
-                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
-            ];
+            $headers = array(
+                "Content-type"        => "text/csv",
+                "Content-Disposition" => "attachment; filename=$fileName",
+                "Pragma"              => "no-cache",
+                "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                "Expires"             => "0"
+            );
 
             $handle = fopen('php://output', 'w');
             fputcsv($handle, $this->headings());
