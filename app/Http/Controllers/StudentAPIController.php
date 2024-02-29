@@ -13,6 +13,7 @@ use App\Models\Bussing;
 use App\Models\AnagkazoAttendance;
 use App\Exports\AttendanceExport;
 use App\Exports\GenerateAttendanceReport;
+use App\Exports\GenerateCSVAttendanceReport;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
 
@@ -284,6 +285,24 @@ class StudentAPIController extends Controller
     }
 
     public function exportAttendance(Request $request) {
+
+        $from = $request->get('fromdate');
+        $to = $request->get('todate');
+
+        $fromBeginning = $request->get("frombeginning", false);
+
+        $calculate_point = $request->get("calculate_point", false);
+
+        $event = $request->get('event');
+        $classId = $request->get('classes');
+
+        list($dateFrom, $dateTo) = $this->getExportDateRange($from, $to, $event, $fromBeginning, $classId);
+
+        return (new GenerateCSVAttendanceReport($dateFrom, $dateTo, $event, $classId, $calculate_point))->downloadCSV("$event-$classId-export.csv");
+
+    }
+
+    public function exportAttendance_halt(Request $request) {
 
         $from = $request->get('fromdate');
         $to = $request->get('todate');

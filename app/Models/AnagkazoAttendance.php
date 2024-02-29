@@ -133,6 +133,7 @@ class AnagkazoAttendance extends Model
             }
             $buildExportArray[] = $row;
         }
+        return $buildExportArray;
     }
 
     public static function synchronizeAttendance($attendanceData) {
