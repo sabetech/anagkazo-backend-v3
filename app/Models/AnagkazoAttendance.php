@@ -136,7 +136,7 @@ class AnagkazoAttendance extends Model
             $row[] = $student->batch;
 
             foreach ($dates as $date) {
-                $attnRecord = $attendanceRecords->search(function ($rec, $key) {
+                $attnRecord = $attendanceRecords->search(function ($rec, $key) use ($student) {
                     return $rec->student_id == $student->id;
                 });
 
