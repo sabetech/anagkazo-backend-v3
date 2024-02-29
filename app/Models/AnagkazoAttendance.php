@@ -101,6 +101,15 @@ class AnagkazoAttendance extends Model
             ->first();
     }
 
+    public static function getStudents($classId)
+    {
+        if ($classId === 'all') {
+            return Student::orderBy('class')->get();
+        }
+
+        return Student::where('class', $classId)->get();
+    }
+
     public static function getDateHeadingsFromRange($from, $to, $event)
     {
         return AnagkazoAttendance::whereBetween('date', [$from, $to])
