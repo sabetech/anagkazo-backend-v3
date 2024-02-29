@@ -131,9 +131,9 @@ class AnagkazoAttendance extends Model
         $buildExportArray = [];
         foreach ($students as $student) {
             $row = [];
-            $row[] = $student->admission_no;
+            $row[] = $student->index_number;
             $row[] = $student->name;
-            $row[] = $student->batch;
+            $row[] = $student->class;
 
             foreach ($dates as $date) {
                 $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student) {
