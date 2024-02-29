@@ -101,6 +101,16 @@ class AnagkazoAttendance extends Model
             ->first();
     }
 
+    public static function getDateHeadingsFromRange($from, $to, $event)
+    {
+        return AnagkazoAttendance::whereBetween('date', [$from, $to])
+            ->where('event', 'LIKE', '%' . $event . '%')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->pluck('date')
+            ->toArray();
+    }
+
     public static function getAttendanceExcelStructure($dateFrom, $dateTo, $event, $classId, $dates) {
         $students = self::getStudents($classId);
 
