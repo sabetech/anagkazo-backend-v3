@@ -136,7 +136,7 @@ class AnagkazoAttendance extends Model
             $row[] = $student->class;
 
             foreach ($dates as $date) {
-                $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student) {
+                $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student, $date) {
                     return ($rec->student_id == $student->id && $date == $rec->date);
                 });
 
