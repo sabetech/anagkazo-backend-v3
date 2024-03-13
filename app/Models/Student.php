@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\PastoralPoint;
 use App\Models\Bussing;
 use App\Helpers\FedenaBackend;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class Student extends Model
 {
