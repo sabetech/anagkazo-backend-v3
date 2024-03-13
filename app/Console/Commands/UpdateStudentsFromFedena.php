@@ -100,7 +100,7 @@ class UpdateStudentsFromFedena extends Command
         $fedena_url = "https://school.anagkazomanager.org/api/students/";
         $headers = [
             'Content-type' => 'application/x-www-form-urlencoded',
-            'Authorization' => 'Token token="65ce5b532f78c944a0c74c497f8d10617d33091f87a1a0813cdeea1ef369b04e"'
+            'Authorization' => 'Token token="d6f9308f834ce7d18f53faaaeaf0bc3d1272ef249658170fa87c8f42f02c0867"'
         ];
 
         $client = new Client();
