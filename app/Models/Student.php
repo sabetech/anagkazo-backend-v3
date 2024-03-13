@@ -40,4 +40,42 @@ class Student extends Model
         FedenaBackend::getFedenaStudentDetail($admissionNumbers, 'student'); //$fedenaStudent['admission_no']
     }
 
+    public static function saveFedenaStudent($fedenaStudent, $admission_no)
+    {
+        $theFedenaStudent = $fedenaStudent['student'];
+
+        $classInfo = StudentClass::where('class', $theFedenaStudent['batch_name'])->first();
+        if (isset($theFedenaStudent['batch_name'])) {
+            if (!$classInfo)
+                $classInfo = StudentClass::create([
+                    'class' => $theFedenaStudent['batch_name'],
+                    'class_size' => 0
+                ]);
+        }
+
+        $student = Student::withTrashed()->where('index_number', $admission_no)->first();
+        if (!$student) {
+            $student = new Student;
+        }
+
+        if ($student->trashed()) {
+            $student->restore();
+        }
+
+        $student->name = isset($theFedenaStudent['student_name']) ? $theFedenaStudent['student_name'] : "Empty Name";
+        $student->index_number = $admission_no;
+        $student->gender = isset($theFedenaStudent['gender']) ? $theFedenaStudent['gender'] : 'x';
+        $student->class_id = $classInfo->id;
+        $student->class = $classInfo->class;
+        $student->country = $theFedenaStudent['country'];
+        $student->phone = $theFedenaStudent['mobile'];
+        $student->email_address = $theFedenaStudent['email'];
+        $student->photo_url = self::getImageFromBase64($theFedenaStudent['photo']['image'], $admission_no);
+        $student->city = $theFedenaStudent['city'];
+
+        $student->save();
+
+        return $student;
+    }
+
 }
