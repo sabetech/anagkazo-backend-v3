@@ -78,4 +78,18 @@ class Student extends Model
         return $student;
     }
 
+    public static function getImageFromBase64($imageBase64, $admission_no)
+    {
+        $extension = explode('/', explode(':', substr($imageBase64, 0, strpos($imageBase64, ';')))[1])[1];
+        $replace = substr($imageBase64, 0, strpos($imageBase64, ',') + 1);
+
+        $image = str_replace($replace, '', $imageBase64);
+        $image = str_replace(' ', '+', $image);
+        $imageName = $admission_no . '.' . $extension;
+
+        Storage::disk('public')->put('student_photo/' . $imageName, base64_decode($image));
+
+        return "storage/student_photo/" . $imageName;
+    }
+
 }
