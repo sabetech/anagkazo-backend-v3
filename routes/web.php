@@ -25,3 +25,6 @@ Route::get('/anagkazo/attendance/reports', [StudentAPIController::class, 'export
 Route::get('/students/ajax/search-student-only', [StudentController::class, 'searchStudentsOnly']);
 Route::get('/pastoral_point_input', [StudentController::class, 'pastoral_point_input'])->name('get_pastoral_student');
 Route::post('/post_pastoral_point', [StudentController::class, 'pastoral_point_input_post']);
+
+Route::post('/v2/pastoral_points_form', [PastoralPointController::class, 'pastoral_point_form'])->name("pastoral_point_form");
+Route::post('/v2/pastoral_points_submit', [PastoralPointController::class, 'pastoral_form_submit'])->name('pastoral_form_submit');
