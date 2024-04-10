@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentAPIController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::get('/', function () {
 
 Route::get('/form/fellowship-bussing', 'StudentClientController@getFellowshipBussingForm')->name('getFellowshipBussingForm');
 Route::get('/anagkazo/attendance/reports', [StudentAPIController::class, 'exportAttendance'])->name('exportAttendance');
+
+Route::get('/pastoral_point_input', [StudentController::class, 'pastoral_point_input'])->name('get_pastoral_student');
+Route::post('/post_pastoral_point', [StudentController::class, 'pastoral_point_input_post']);

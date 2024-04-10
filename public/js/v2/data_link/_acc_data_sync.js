@@ -1,0 +1,1 @@
+var _acc_data_sync = {};
