@@ -58,7 +58,7 @@
             $('.student-select').select2({
                 placeholder: 'Choose your name',
                 ajax: {
-                    url: 'public/students/ajax/search-student-only',
+                    url: 'students/ajax/search-student-only',
                     delay: 250,
                     data: function(params) {
                         var query = {
