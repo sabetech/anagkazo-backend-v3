@@ -45,4 +45,16 @@ class StudentController extends Controller
             ->with('student', $student)
             ->with('points', $totalPoints);
     }
+
+    public function searchStudentsOnly(Request $request)
+    {
+        $searchTerm = $request->get('search');
+
+        $result = Student::where('students.name', 'LIKE', '%' . $searchTerm . '%')
+            ->select(DB::raw('students.id as id, CONCAT(students.index_number, " ",students.name)  as text'))
+            ->get()
+            ->take(10);
+
+        return response()->json($result);
+    }
 }
