@@ -89,9 +89,9 @@ class GenerateAttendanceCSV2 extends Command
             if (count($result) == 1) {
 
                 if ($result[0][3] == $eventCode . "_IN") {
-                    $indexArray[$eventRow[0]][$eventRow[1]] = 'ABSENT [DID\'T SCAN_OUT]';
+                    $indexArray[$eventRow[0]][$eventRow[1]] = 'PRESENT';
                 }else {
-                    $indexArray[$eventRow[0]][$eventRow[1]] = 'ABSENT [DID\'T SCAN_IN]';
+                    $indexArray[$eventRow[0]][$eventRow[1]] = 'PRESENT';
                 }
 
             }

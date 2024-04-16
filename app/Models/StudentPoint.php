@@ -11,5 +11,4 @@ class StudentPoint extends Model
     protected $table = 'student_point';
     protected $guarded = ['id'];
 
-
 }
