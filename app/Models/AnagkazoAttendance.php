@@ -142,11 +142,11 @@ class AnagkazoAttendance extends Model
 
                 if ($attnRecord) {
                     if (($attnRecord->time_in) && ($attnRecord->time_out)) {
-                        $row[] = "PRESENT"; //[ IN: $attnRecord->time_in ] OUT: $attnRecord->time_out";
+                        $row[] = "[ IN: $attnRecord->time_in  OUT: $attnRecord->time_out ]";//"PRESENT"; //
                     }else if ($attnRecord->time_in) {
-                        $row[] = "PRESENT";//"ABSENT [IN: $attnRecord->time_in]";
+                        $row[] = "ABSENT [IN: $attnRecord->time_in]"; //"PRESENT";
                     }else if ($attnRecord->time_out) {
-                        $row[] = "PRESENT"; //"ABSENT [OUT: $attnRecord->time_out]";
+                        $row[] = "ABSENT [OUT: $attnRecord->time_out]"; //"PRESENT";
                     }else {
                         $row[] = "ABSENT";
                     }
