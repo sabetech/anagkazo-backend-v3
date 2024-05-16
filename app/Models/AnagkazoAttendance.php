@@ -128,6 +128,12 @@ class AnagkazoAttendance extends Model
             ->whereIn('student_id', $students->pluck('id')->toArray())
             ->get();
 
+        //Index attendance records  ...
+        $indexedAttnRecords = [];
+        foreach ($attendanceRecords as $attn) {
+            $indexedAttnRecords[$attn->student_id][$attn->date] = $attn;
+        }
+
         $buildExportArray = [];
         foreach ($students as $student) {
             $row = [];
@@ -136,9 +142,11 @@ class AnagkazoAttendance extends Model
             $row[] = $student->class;
 
             foreach ($dates as $date) {
-                $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student, $date) {
-                    return ($rec->student_id == $student->id && $date == $rec->date);
-                });
+                $attnRecord = $indexedAttnRecords[$student->id][$date];
+
+                // $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student, $date) {
+                //     return ($rec->student_id == $student->id && $date == $rec->date);
+                // });
 
                 if ($attnRecord) {
                     if (($attnRecord->time_in) && ($attnRecord->time_out)) {
