@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use stdClass;
 
 class AnagkazoAttendance extends Model
 {
@@ -142,7 +143,12 @@ class AnagkazoAttendance extends Model
             $row[] = $student->class;
 
             foreach ($dates as $date) {
-                $attnRecord = $indexedAttnRecords[$student->id][$date];
+                if (!isset($indexedAttnRecords[$student->id][$date])) {
+                    $attnRecord = false;
+                }else{
+                    $attnRecord = $indexedAttnRecords[$student->id][$date];
+                }
+
 
                 // $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student, $date) {
                 //     return ($rec->student_id == $student->id && $date == $rec->date);
