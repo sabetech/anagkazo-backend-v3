@@ -149,18 +149,13 @@ class AnagkazoAttendance extends Model
                     $attnRecord = $indexedAttnRecords[$student->id][$date];
                 }
 
-
-                // $attnRecord = $attendanceRecords->first(function ($rec, $key) use ($student, $date) {
-                //     return ($rec->student_id == $student->id && $date == $rec->date);
-                // });
-
                 if ($attnRecord) {
                     if (($attnRecord->time_in) && ($attnRecord->time_out)) {
                         $row[] = "PRESENT"; // [ IN: $attnRecord->time_in  OUT: $attnRecord->time_out ]";
                     }else if ($attnRecord->time_in) {
-                        $row[] = "ABSENT [IN: $attnRecord->time_in]"; //"PRESENT";
+                        $row[] = "PRESENT"; //"ABSENT [IN: $attnRecord->time_in]"; //
                     }else if ($attnRecord->time_out) {
-                        $row[] = "ABSENT [OUT: $attnRecord->time_out]"; //"PRESENT";
+                        $row[] = "PRESENT"; //"ABSENT [OUT: $attnRecord->time_out]"; //
                     }else {
                         $row[] = "ABSENT";
                     }
