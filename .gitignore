@@ -19,3 +19,4 @@ yarn-error.log
 /.vscode
 *.csv
 *.DS_Store
+app/Console/Commands/STUDENTS-SC-2024A.sql

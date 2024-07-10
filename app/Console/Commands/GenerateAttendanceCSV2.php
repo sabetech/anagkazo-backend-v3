@@ -71,7 +71,7 @@ class GenerateAttendanceCSV2 extends Command
 
         $headings = ["Index Number", "Student Name", "batch"];
         $dates = self::generateDates($eventsArray);
-        $headings = [...$headings, ...$dates];
+        $headings = array_merge($headings, $dates);
         print_r("Dates Generated!\n");
         print_r("Indexing Attendance!\n");
         $indexArray = [];
