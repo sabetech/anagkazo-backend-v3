@@ -336,4 +336,8 @@ class StudentAPIController extends Controller
         return StudentClass::all();
     }
 
+    public function postFellowshipService(Request $request) {
+        Log::info("Request: ", $request);
+    }
+
 }
