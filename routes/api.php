@@ -37,6 +37,7 @@ Route::group(['prefix'=>'pwa'], function () {
     Route::post('bussing/{indexNumber}', [StudentAPIController::class, 'postBussing']);
     Route::post('fellowship_service/{indexNumber}', [StudentAPIController::class, 'postFellowshipService']);
     Route::get('fellowship_service/{indexNumber}', [StudentAPIController::class, 'getFellowshipService']);
+    Route::post('fellowship_service/{indexNumber}/cancel', [StudentApiController::class, 'cancelFellowshipService']);
 });
 
 Route::group(['prefix'=>'admin'], function() {
