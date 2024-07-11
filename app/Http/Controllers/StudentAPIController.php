@@ -340,10 +340,17 @@ class StudentAPIController extends Controller
     public function postFellowshipService($studentId, Request $request) {
         Log::info(["Request: " => $request->all()]);
 
-        $studentId = Student::find($studentId);
+        $student = Student::find($studentId);
+        if (!$student) return response()->json(
+            [
+                'success' => false,
+                'message' => 'Could not save fellowship service.'
+            ], 400
+        );
+
         $result = FellowshipService::updateOrCreate(
             [
-                'student_id' => $studentId,
+                'student_id' => $student->id,
                 'service_date' => $request->get('service_date'),
                 'attendance' => $request->get('attendance'),
                 'offering' => $request->get('offering'),
@@ -362,7 +369,7 @@ class StudentAPIController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Could not save fellowship service image Image.'
+                    'message' => 'Could not save fellowship service Image.'
                 ], 400
             );
         }
