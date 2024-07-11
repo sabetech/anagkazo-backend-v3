@@ -348,17 +348,6 @@ class StudentAPIController extends Controller
             ], 400
         );
 
-        $result = FellowshipService::updateOrCreate(
-            [
-                'student_id' => $student->id,
-                'service_date' => $request->get('service_date'),
-                'attendance' => $request->get('attendance'),
-                'offering' => $request->get('offering'),
-                'foreign_offering' => $request->get('foreign_offering'),
-            ]
-        );
-
-
         $uploadedFileUrl = null;
         //get uploaded image from request
         if ($request->file('fellowship_service_image')) {
@@ -375,6 +364,18 @@ class StudentAPIController extends Controller
         }
 
         Log::info($uploadedFileUrl);
+
+        $result = FellowshipService::updateOrCreate(
+            [
+                'student_id' => $student->id,
+                'service_date' => $request->get('service_date'),
+                'attendance' => $request->get('attendance'),
+                'offering' => $request->get('offering'),
+                'foreign_offering' => $request->get('foreign_offering'),
+                'image_url' => $uploadedFileUrl,
+            ]
+        );
+
         Log::info(['result::'=> $result]);
 
         return response()->json(
