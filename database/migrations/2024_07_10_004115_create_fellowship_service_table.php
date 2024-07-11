@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained("students");
             $table->dateTime('service_date');
             $table->unsignedInteger('attendance')->nullable();
-            $table->unsignedInteger('offering')->nullable();
+            $table->unsignedDecimal('offering')->nullable();
+            $table->unsignedDecimal('foreign_offering')->nullable();
             $table->text('cancel_service_reason')->nullable();
             $table->timestamps();
         });
