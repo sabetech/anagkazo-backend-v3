@@ -411,4 +411,37 @@ class StudentAPIController extends Controller
         ]);
     }
 
+    public function cancelFellowshipService($studentId, Request $request) {
+        $student = Student::find($studentId);
+
+        if (!$student) return;
+
+        $result = FellowshipService::updateOrCreate(
+            [
+                'student_id' => $student->id,
+                'service_date' => $request->get('service_date'),
+            ],
+            [
+                'cancel_service_reason' => $request->get('reason')
+            ]
+        );
+
+        if ($result) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Service has been cancelled successfully!',
+                ]
+                );
+        }else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Service could not be cancelled!'
+                ]
+                );
+        }
+
+    }
+
 }
