@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedDecimal('offering')->nullable();
             $table->unsignedDecimal('foreign_offering')->nullable();
             $table->text('cancel_service_reason')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
