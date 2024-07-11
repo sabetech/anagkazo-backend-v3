@@ -344,11 +344,12 @@ class StudentAPIController extends Controller
         if (!$student) return response()->json(
             [
                 'success' => false,
-                'message' => 'Could not save fellowship service.'
+                'message' => "Could not save fellowship service. Student doesn't exist"
             ], 400
         );
 
         $uploadedFileUrl = null;
+
         //get uploaded image from request
         if ($request->file('fellowship_service_image')) {
             $uploadedFileUrl = Cloudinary::upload($request->file('fellowship_service_image')->getRealPath(), [
