@@ -10,4 +10,5 @@ class FellowshipService extends Model
     use HasFactory;
 
     protected $table = 'fellowship_service';
+    protected $guarded = ['id'];
 }
