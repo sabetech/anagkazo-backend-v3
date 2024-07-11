@@ -337,7 +337,7 @@ class StudentAPIController extends Controller
     }
 
     public function postFellowshipService($studentId, Request $request) {
-        Log::info(["Request: " => $request->get()]);
+        Log::info(["Request: " => $request->all()]);
 
         $studentId = Student::find($studentId);
         $result = FellowshipService::updateOrCreate(
