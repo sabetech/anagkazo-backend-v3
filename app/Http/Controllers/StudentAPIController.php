@@ -336,8 +336,46 @@ class StudentAPIController extends Controller
         return StudentClass::all();
     }
 
-    public function postFellowshipService(Request $request) {
-        Log::info(["Request: " => $request]);
+    public function postFellowshipService($studentId, Request $request) {
+        Log::info(["Request: " => $request->get()]);
+
+        $studentId = Student::find($studentId);
+        $result = FellowshipService::updateOrCreate(
+            [
+                'student_id' => $studentId,
+                'service_date' => $request->get('service_date'),
+                'attendance' => $request->get('attendance'),
+                'offering' => $request->get('offering'),
+                'foreign_offering' => $request->get('foreign_offering'),
+            ]
+        );
+
+
+        $uploadedFileUrl = null;
+        //get uploaded image from request
+        if ($request->file('fellowship_service_image')) {
+            $uploadedFileUrl = Cloudinary::upload($request->file('fellowship_service_image')->getRealPath(), [
+                'folder' => 'Anagkazo.Apps'
+            ])->getSecurePath();
+        }else{
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Could not save fellowship service image Image.'
+                ], 400
+            );
+        }
+
+        Log::info($uploadedFileUrl);
+        Log::info(['result::'=> $result]);
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Fellowship Data Saved',
+                'data' => $result
+            ]
+            );
     }
 
 }
