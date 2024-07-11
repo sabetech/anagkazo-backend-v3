@@ -373,7 +373,8 @@ class StudentAPIController extends Controller
                 'attendance' => $request->get('attendance'),
                 'offering' => $request->get('offering'),
                 'foreign_offering' => $request->get('foreign_offering'),
-                'image_url' => $uploadedFileUrl
+                'image_url' => $uploadedFileUrl,
+                'cancel_service_reason' => null,
             ]
         );
 
@@ -422,7 +423,11 @@ class StudentAPIController extends Controller
                 'service_date' => $request->get('service_date'),
             ],
             [
-                'cancel_service_reason' => $request->get('reason')
+                'cancel_service_reason' => $request->get('reason'),
+                'offering' => null,
+                'foreign_offering' => null,
+                'image_url' => null,
+                'attendance' => null
             ]
         );
 
