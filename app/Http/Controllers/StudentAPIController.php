@@ -368,10 +368,12 @@ class StudentAPIController extends Controller
             [
                 'student_id' => $student->id,
                 'service_date' => $request->get('service_date'),
+            ],
+            [
                 'attendance' => $request->get('attendance'),
                 'offering' => $request->get('offering'),
                 'foreign_offering' => $request->get('foreign_offering'),
-                'image_url' => $uploadedFileUrl,
+                'image_url' => $uploadedFileUrl
             ]
         );
 
