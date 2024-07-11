@@ -401,7 +401,7 @@ class StudentAPIController extends Controller
             );
         }
 
-        $fellowshipServices = FellowshipService::where('student_id', $student->id)->get();
+        $fellowshipServices = FellowshipService::where('student_id', $student->id)->orderBy('service_date', 'desc')->get();
 
         return response()->json([
             'success' => true,
