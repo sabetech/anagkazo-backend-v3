@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_leader_fellowship', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId("bacenta_leader_student_id")->constrained("students");
-            $table->foreignId("fellowship_leader_student_id")->constrained("students");
-            $table->timestamps();
-        });
+        //REWORK THIS ... SOON not LATER!!!
+        // Schema::create('student_leader_fellowship', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId("bacenta_leader_student_id")->constrained("students");
+        //     $table->foreignId("fellowship_leader_student_id")->constrained("students");
+        //     $table->timestamps();
+        // });
     }
 
     /**
