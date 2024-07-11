@@ -389,4 +389,24 @@ class StudentAPIController extends Controller
             );
     }
 
+    public function getFellowshipService($studentId, Request $request){
+        $student = Student::find($studentId);
+
+        if (!$student) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Cannot get student'
+                ]
+            );
+        }
+
+        $fellowshipServices = FellowshipService::where('student_id', $student->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $fellowshipServices
+        ]);
+    }
+
 }
