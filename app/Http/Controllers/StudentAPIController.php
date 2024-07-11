@@ -364,8 +364,6 @@ class StudentAPIController extends Controller
             );
         }
 
-        Log::info($uploadedFileUrl);
-
         $result = FellowshipService::updateOrCreate(
             [
                 'student_id' => $student->id,
@@ -377,13 +375,16 @@ class StudentAPIController extends Controller
             ]
         );
 
-        Log::info(['result::'=> $result]);
-
         return response()->json(
             [
                 'success' => true,
                 'message' => 'Fellowship Data Saved',
-                'data' => $result
+                'data' => json_encode([
+                    'service_date' => $result->service_date,
+                    'image_url' => $result->image_url,
+                    'attendance' => $result->attendance,
+                    'offering' => $result->offering,
+                    ])
             ]
             );
     }
