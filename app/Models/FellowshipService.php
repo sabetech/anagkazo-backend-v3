@@ -12,8 +12,8 @@ class FellowshipService extends Model
     protected $table = 'fellowship_service';
     protected $guarded = ['id'];
 
-    public static function getFellowshipServices(string $from, string $to) {
-        $services = self::whereBetween('service_date', [$from, $to])->get();
+    public static function getFellowshipServices(string $date) {
+        $services = self::where('service_date', $date)->get();
 
         return $services;
     }

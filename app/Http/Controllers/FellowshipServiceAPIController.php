@@ -9,10 +9,9 @@ class FellowshipServiceAPIController extends Controller
 {
     //
     public function fellowshipServices(Request $request) {
-        $from = $request->get('from');
-        $to = $request->get('to');
+        $date = $request->get('date');
 
-        $fellowshipServices = FellowshipService::getFellowshipServices($from, $to);
+        $fellowshipServices = FellowshipService::getFellowshipServices($date);
 
         return response()->json([
             'success' => true,
