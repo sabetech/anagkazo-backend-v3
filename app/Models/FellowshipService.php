@@ -12,13 +12,13 @@ class FellowshipService extends Model
     protected $table = 'fellowship_service';
     protected $guarded = ['id'];
 
-    public function getFellowshipServices(string $from, string $to) {
+    public static function getFellowshipServices(string $from, string $to) {
         $services = self::whereBetween('service_date', [$from, $to])->get();
 
         return $services;
     }
 
-    public function getFellowshipServiceDefaulters($date) {
+    public static function getFellowshipServiceDefaulters($date) {
         //get students who didn't fill the form on this date.
         //first check if there was service on that date
 
