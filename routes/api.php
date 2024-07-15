@@ -42,4 +42,5 @@ Route::group(['prefix'=>'pwa'], function () {
 
 Route::group(['prefix'=>'admin'], function() {
     Route::get('/classes', [StudentAPIController::class, 'classes']);
+    Route::get('/fellowship_services', [FellowshipServiceAPIController::class, 'fellowshipServices']);
 });
