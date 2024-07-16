@@ -15,7 +15,7 @@ class FellowshipService extends Model
     public static function getFellowshipServices(string $date) {
         $services = self::join('students', 'students.id', '=', 'fellowship_service.student_id')
                         ->where('service_date', $date)
-                        ->select('fellowship_service.id','students.name as name', 'service_date as date', 'attendance', 'offering')
+                        ->select('fellowship_service.id','students.index_number', 'students.name as name', 'service_date as date', 'attendance', 'offering')
                         ->get();
 
         return $services;
