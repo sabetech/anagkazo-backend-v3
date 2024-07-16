@@ -13,7 +13,10 @@ class FellowshipService extends Model
     protected $guarded = ['id'];
 
     public static function getFellowshipServices(string $date) {
-        $services = self::where('service_date', $date)->get();
+        $services = self::join('students', 'students.id', '=', 'fellowship_service.student_id')
+                        ->where('service_date', $date)
+                        ->select('students.name as name', 'service_date as date', 'attendance', 'offering')
+                        ->get();
 
         return $services;
     }
