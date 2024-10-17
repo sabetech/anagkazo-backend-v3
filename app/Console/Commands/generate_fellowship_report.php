@@ -34,7 +34,7 @@ class generate_fellowship_report extends Command
 
         $student_ids = Student::where('class_id', $class_id)->pluck('id')->toArray();
 
-        $headers = ['index_number', 'name', 'serive_date', 'attendance', 'offering', 'foreign_offering'];
+        $headers = ['index_number', 'name', 'service_date', 'attendance', 'offering', 'foreign_offering'];
         $fellowshipServices = FellowshipService::join('students', 'students.id', '=', 'fellowship_service.student_id')
                                 ->whereIn('student_id', $student_ids)
                                 ->select($headers)->get();
