@@ -449,14 +449,14 @@ class StudentAPIController extends Controller
     }
 
     public function getStudentImage(Request $request, $id) {
-        // $student = Student::find($id);
+        $student = Student::find($id);
 
-        // if (!$student) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Cannot get student'
-        //     ]);
-        // }
+        if (!$student) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Cannot get student'
+            ]);
+        }
 
         $fedena_url = "https://school.anagkazomanager.org/api/students/";
         $headers = [
@@ -468,7 +468,7 @@ class StudentAPIController extends Controller
         try {
             $res = $client->request(
                 'GET',
-                $fedena_url . "700997",
+                $fedena_url . $student->index_number,
                 ['headers' => $headers]
             );
 
