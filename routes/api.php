@@ -29,7 +29,7 @@ Route::post('/health', function () {
 
 Route::group(['prefix'=>'pwa'], function () {
     Route::post('verify-indexnumber', [StudentAPIController::class, 'verifyIndexNumber']);
-    Route::get('/student/{id}/image', [StudentAPIController::class, 'getStudentImage']);
+    Route::get('/student/{index_number}/image', [StudentAPIController::class, 'getStudentImage']);
     Route::post('authenticate', [StudentAPIController::class, 'authenticate']);
     Route::get('pastoral-points/{indexNumber}', [StudentAPIController::class, 'getPastoralPoints']);
     Route::get('bussing/{indexNumber}', [StudentAPIController::class, 'getBussing']);
