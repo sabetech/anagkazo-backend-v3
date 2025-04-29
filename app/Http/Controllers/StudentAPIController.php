@@ -8,7 +8,7 @@ use App\Models\StudentClass;
 use App\Helpers\FedenaAPIHelper;
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\PastoralPoint;
+use GuzzleHttp\Client;
 use App\Models\Bussing;
 use App\Models\AnagkazoAttendance;
 use App\Models\FellowshipService;
@@ -446,7 +446,53 @@ class StudentAPIController extends Controller
                 ]
                 );
         }
+    }
 
+    public function getStudentImage(Request $request, $id) {
+        // $student = Student::find($id);
+
+        // if (!$student) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Cannot get student'
+        //     ]);
+        // }
+
+        $fedena_url = "https://school.anagkazomanager.org/api/students/";
+        $headers = [
+            'Content-type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Token token="' . env("FEDENA_API_TOKEN") . '"'
+        ];
+
+        $client = new Client(['base_uri' => $fedena_url]);
+        try {
+            $res = $client->request(
+                'GET',
+                $fedena_url . "700997",
+                ['headers' => $headers]
+            );
+
+            $body = $res->getBody();
+            $content = $body->getContents();
+            $xml = simplexml_load_string($content);
+
+            $jsonString = json_encode($xml);
+            $image = json_decode($jsonString, TRUE);
+
+            Log::info($image);
+
+        } catch (\Exception $e) {
+            echo $e->getMessage() . "\n";
+            return  [];
+        }
+        //make request to get student image from fedena
+        // $student->image_url = $this->getStudentImageFromFedena($student->index_number);
+
+
+        return response()->json([
+            'success' => true,
+            'data' => $image['student']['photo']
+        ]);
     }
 
 }
